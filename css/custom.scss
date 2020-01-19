@@ -1,0 +1,298 @@
+/*!
+* Animated rays background and expand/close element
+* Author: TMMC <https://github.com/TMMC>
+* Version: 0.1.0
+* Created: 2020-01-18
+* Edited: 2020-01-19
+*/
+
+// node-sass: `sass custom.scss:custom.min.css --watch --sourcemap=none --style compressed`
+// darth-sass: `sass custom.scss:custom.min.css --watch --no-source-map --style=compressed`
+
+// === Variables
+$sqr-side-vw: 200vw !default;
+$sqr-side-vh: 200vh !default;
+$rays-bg: #005b97 !default;
+$heading-color: #002a3d !default;
+$doc-min-size: 360px !default;
+$breakpoint-sm: 820px !default;
+$breakpoint-xs: 540px !default;
+
+// === Animations
+@-webkit-keyframes rotatedRays {
+	from {
+			-webkit-transform: translate(-50%,-50%) rotate(0deg);
+			        transform: translate(-50%,-50%) rotate(0deg);
+	} to {
+			-webkit-transform: translate(-50%,-50%) rotate(360deg);
+			        transform: translate(-50%,-50%) rotate(360deg);
+	}
+}
+
+@keyframes rotatedRays {
+	from {
+			-webkit-transform: translate(-50%,-50%) rotate(0deg);
+			        transform: translate(-50%,-50%) rotate(0deg);
+	} to {
+			-webkit-transform: translate(-50%,-50%) rotate(360deg);
+			        transform: translate(-50%,-50%) rotate(360deg);
+	}
+}
+
+// === Appereance
+html,
+body {
+	min-width: $doc-min-size;
+}
+
+body {
+	text-align: center;
+	-webkit-backface-visibility: hidden;
+	        backface-visibility: hidden;
+	background-color: $rays-bg;
+	// font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+	font-family: 'Roboto', sans-serif;
+}
+
+pre,
+kbd,
+code,
+samp {
+	font-family: 'Roboto Mono', monospace;
+}
+
+h1, .h1,
+h2, .h2,
+h3, .h3,
+h4, .h4,
+h5, .h5,
+h6, .h6 {
+	font-family: 'Roboto Slab', sans-serif;
+}
+
+main {
+	// == Position
+	min-width: $doc-min-size;
+	min-height: $doc-min-size;
+	width: 100%;
+	min-height: 100vh;
+	position: relative;
+	z-index: 1;
+
+	// == Flex
+	display: -webkit-box;
+	display: -moz-box;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-box-orient: vertical;
+	-webkit-box-direction: normal;
+	   -moz-box-orient: vertical;
+	   -moz-box-direction: normal;
+	    -ms-flex-direction: column;
+	        flex-direction: column;
+	-webkit-box-pack: center;
+	   -moz-box-pack: center;
+	    -ms-flex-pack: center;
+	        justify-content: center;
+	-webkit-box-align: stretch /* center */;
+	   -moz-box-align: stretch /* center */;
+	    -ms-flex-align: stretch /* center */;
+	        align-items: stretch /* center */;
+
+	// == Background overlay
+	background-color: rgba(#000,.125);
+
+	// == Clearfix
+	&:before,
+	&:after {
+		display: table;
+		content: '';
+		clear: both;
+	}
+}
+
+// == Rotating background
+.rays-bg {
+	// == Position
+	// &, &:before {
+	// 	min-width: $doc-min-size;
+	// 	min-height: $doc-min-size;
+	// }
+	width: 100vw;
+	height: 100vh;
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	z-index: 0;
+
+	// == Flex
+	// display: -webkit-box;
+	// display: -moz-box;
+	// display: -ms-flexbox;
+	// display: flex;
+	// -webkit-box-orient: horizontal;
+	// -webkit-box-direction: normal;
+	//    -moz-box-orient: horizontal;
+	//    -moz-box-direction: normal;
+	//     -ms-flex-flow: row wrap;
+	//         flex-flow: row wrap;
+	// -webkit-box-align: center;
+	//    -moz-box-align: center;
+	//     -ms-flex-align: center;
+	//         align-items: center;
+	// -ms-flex-line-pack: center;
+	//     align-content: center;
+
+	// == Misc
+	overflow: hidden;
+	background-color: $rays-bg;
+
+	// == Rotating rays
+	&:before {
+		// == Background
+		// content: url('./sunrays.svg');
+		background-color: $rays-bg;
+		background-image: url('../img/sunrays.svg');
+		background-repeat: no-repeat;
+		background-size: $sqr-side-vw;
+		background-position: center;
+
+		// == Position
+		content: "";
+		position: absolute;
+		width: $sqr-side-vw;
+		height: $sqr-side-vw;
+		width: $sqr-side-vw;
+		height: $sqr-side-vw;
+		top: 50%;
+		left: 50%;
+		z-index: -1;
+		-webkit-transform-origin: center;
+		        transform-origin: center;
+		-webkit-transform: translate(-50%,-50%);
+		        transform: translate(-50%,-50%);
+
+    @media (orientation: portrait) {
+      width: $sqr-side-vh;
+      height: $sqr-side-vh;
+      background-size: $sqr-side-vh;
+    }
+
+		// == Animation
+		-webkit-animation-name: rotatedRays;
+		        animation-name: rotatedRays;
+		-webkit-animation-duration: 125000ms;
+		        animation-duration: 125000ms;
+		-webkit-animation-iteration-count: infinite;
+		        animation-iteration-count: infinite;
+		-webkit-animation-timing-function: linear;
+		        animation-timing-function: linear;
+	}
+}
+
+// === Main text
+.main-heading {
+	color: $heading-color;
+	text-shadow: 1px 1px 0 rgba(#fff,.5);
+	text-transform: uppercase;
+	font-size: 2.15rem;
+	letter-spacing: .125rem;
+	font-weight: 900;
+	margin-top: 1rem;
+	margin-bottom: 1rem;
+
+	@media (min-width: $breakpoint-xs) {
+		font-size: 3rem;
+		letter-spacing: .225rem;
+	}
+
+	@media (min-width: $breakpoint-sm) {
+		font-size: 5rem;
+		letter-spacing: .35rem;
+	}
+
+	// == Handling long words and URLs
+	overflow-wrap: break-word;
+	word-wrap: break-word;
+	word-break: break-all; // dangerous in WebKit
+	word-break: break-word; // non standard
+	-webkit-hyphens: auto;
+		 -moz-hyphens: auto;
+			-ms-hyphens: auto;
+					hyphens: auto;
+}
+
+// === Toggle close/expand
+.close-expand {
+	cursor: pointer;
+	display: block;
+	width: 1.35rem;
+	height: 1rem;
+	overflow: hidden;
+	position: relative;
+	text-decoration: none;
+	border-width: 2px 0;
+	opacity: .7;
+
+	&:before,
+	&:after {
+		border-radius: 2px;
+		display: block;
+		content: "";
+		// width: 100%;
+		position: absolute;
+		left: 0;
+		right: 1px;
+		height: 2px;
+		background-color: $heading-color;
+		-webkit-transition: -webkit-transform .175s linear;
+		        transition: -webkit-transform .175s linear;
+		        transition: transform .175s linear;
+		        transition: transform .175s linear, -webkit-transform .175s linear;
+	}
+
+	&:before {
+		top: 0;
+		-webkit-transform-origin: right center;
+		        transform-origin: right center;
+	}
+	&:after {
+		bottom: 0;
+		-webkit-transform-origin: right center;
+		        transform-origin: right center;
+	}
+
+	span {
+		border-radius: 2px;
+		display: block;
+		position: absolute;
+		left: 0;
+		right: 0;
+		top: 50%;
+		border: 1px solid $heading-color;
+		border-width: 1px 0;
+		width: 100%;
+		clip: auto;
+		-webkit-transition: opacity .125s ease-in-out;
+		        transition: opacity .125s ease-in-out;
+	}
+
+	// == Hover while expanded to close related element
+	&.state-expanded {
+		&:hover {
+			&:before {
+				-webkit-transform: rotate(-44.125deg);
+								transform: rotate(-44.125deg);
+			}
+			&:after {
+				-webkit-transform: rotate(44.125deg);
+								transform: rotate(44.125deg);
+			}
+			span {
+				opacity: 0;
+			}
+		}
+	}
+}
