@@ -1,1 +1,1 @@
-# Animated-rays-background-and-expand-close-element
+# Animated rays background and expand close element
