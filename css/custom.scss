@@ -16,6 +16,7 @@ $rays-bg: #005b97 !default;
 $heading-color: #002a3d !default;
 $gh-repo-link-bg: #cadff4 !default;
 $gh-repo-link-height: 96px !default;
+$gh-repo-link-z-index: 10000 !default;
 $doc-min-size: 360px !default;
 $breakpoint-sm: 820px !default;
 $breakpoint-xs: 540px !default;
@@ -305,6 +306,7 @@ main {
   height: $gh-repo-link-height;
   width: $gh-repo-link-height;
   position: fixed;
+  z-index: $gh-repo-link-z-index;
   top: 0;
   right: 0;
 
