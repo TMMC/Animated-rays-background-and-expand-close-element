@@ -3,7 +3,7 @@
 * Author: TMMC <https://github.com/TMMC>
 * Version: 0.1.0
 * Created: 2020-01-18
-* Edited: 2020-01-19
+* Edited: 2020-01-20
 */
 
 // node-sass: `sass custom.scss:custom.min.css --watch --sourcemap=none --style compressed`
@@ -14,6 +14,8 @@ $sqr-side-vw: 200vw !default;
 $sqr-side-vh: 200vh !default;
 $rays-bg: #005b97 !default;
 $heading-color: #002a3d !default;
+$gh-repo-link-bg: #cadff4 !default;
+$gh-repo-link-height: 96px !default;
 $doc-min-size: 360px !default;
 $breakpoint-sm: 820px !default;
 $breakpoint-xs: 540px !default;
@@ -154,16 +156,15 @@ main {
 		// == Background
 		// content: url('./sunrays.svg');
 		background-color: $rays-bg;
+		background-image: url('../img/sunrays.png'); // fallback
 		background-image: url('../img/sunrays.svg');
 		background-repeat: no-repeat;
 		background-size: $sqr-side-vw;
 		background-position: center;
 
 		// == Position
-		content: "";
+		content: '';
 		position: absolute;
-		width: $sqr-side-vw;
-		height: $sqr-side-vw;
 		width: $sqr-side-vw;
 		height: $sqr-side-vw;
 		top: 50%;
@@ -216,7 +217,7 @@ main {
 	// == Handling long words and URLs
 	overflow-wrap: break-word;
 	word-wrap: break-word;
-	word-break: break-all; // dangerous in WebKit
+	word-break: break-all;  // dangerous in WebKit
 	word-break: break-word; // non standard
 	-webkit-hyphens: auto;
 		 -moz-hyphens: auto;
@@ -240,7 +241,7 @@ main {
 	&:after {
 		border-radius: 2px;
 		display: block;
-		content: "";
+		content: '';
 		// width: 100%;
 		position: absolute;
 		left: 0;
@@ -294,5 +295,34 @@ main {
 				opacity: 0;
 			}
 		}
+	}
+}
+
+// === GitHub link
+.gh-repo-link {
+	// == Position
+	display: block;
+  height: $gh-repo-link-height;
+  width: $gh-repo-link-height;
+  position: fixed;
+  top: 0;
+  right: 0;
+
+	// == Shape/clip
+	-webkit-clip-path: polygon(0% 0%, 100% 0%, 100% 100%);
+	        clip-path: polygon(0% 0%, 100% 0%, 100% 100%);
+
+	// == Background
+	// background-color: $gh-repo-link-bg;
+	background-image: url('../img/github-corner-icon-cutout.png'); // fallback
+	background-image: url('../img/github-corner-icon-cutout.svg');
+	background-position: right top;
+	background-repeat: no-repeat;
+	background-size: $gh-repo-link-height $gh-repo-link-height;
+
+	// == Misc
+	&,
+	& > span {
+		outline: 0 none;
 	}
 }
